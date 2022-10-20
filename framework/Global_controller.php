@@ -1,6 +1,6 @@
 <?php
     require_once("model/Conexion.php");
-
+    session_start();
     $conn = $obj->conexion();
     $categories = array("Food", "Materials", "Items", "Clothes");
     $editar = false;

@@ -1,6 +1,6 @@
 <?php include_once("./framework/Global_controller.php"); ?>
-<?php include_once("./_header.php"); ?>
-<?php include_once("./framework/product-list.php") ?>
+<?php include_once("./www/templates/_header.php"); ?>
+<?php include_once("./www/controllers/product-list.php") ?>
 
 <div class="container mt-4">
   <div class="mt-5">
@@ -38,8 +38,11 @@
               </div>
             </div>
           </div>
+          
+          <?php if($user["admin"]){ ?>
+            <a class="btn btn-success mb-2" href="./www/templates/product-add.php">Add Products</a>
+          <?php } ?>
 
-          <a class="btn btn-success mb-2" href="./product-add.php">Add Products</a>
           <button class="btn btn-primary mb-2" style="float:right;" type="submit" name="commandFilter" value="1">Search</button>
         </div>
       </div>
@@ -70,15 +73,26 @@
           <td><?=$product["product_price"];?> €</td>
           <td><?=$product["product_category"];?></td>
           <td><?=$product["product_description"];?></td>
-          <td><a class="btn btn-primary mr-2" href="./product-add.php?id=<?=$product["id_product"];?>"><i class='bx bx-edit-alt'></i></a>
-          <form method="POST" class="d-inline-block">
-            <button class="btn btn-danger" type="submit" name="commandBorrar" value="<?=$product["id_product"];?>"><i class='bx bx-trash' ></i></button></td>
-          </form>
-        </tr>
+          <?php if($user["admin"]){ ?>
+            <td>
+              <a class="btn btn-primary mr-2" href="./www/templates/product-add.php?id=<?=$product["id_product"];?>"><i class='bx bx-edit-alt'></i></a>
+              <form method="POST" class="d-inline-block">
+                <button class="btn btn-danger" type="submit" name="commandBorrar" value="<?=$product["id_product"];?>"><i class='bx bx-trash' ></i></button>
+              </form>
+            </td>
+          <?php } else { ?>
+            <td>
+              <form method="POST">
+                <button class="btn btn-secondary" type="submit" name="commandAddProduct" value="<?=$product["id_product"];?>"><i class='bx bx-shopping-bag'></i></button>
+              </form>
+            </td>
+          <?php } ?>
+        </tr> 
         <?php } ?>
       </tbody>
     </table>
   </div>
 </div>
+
 </body>
 </html>

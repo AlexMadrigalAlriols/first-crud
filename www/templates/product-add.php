@@ -1,6 +1,11 @@
-<?php include_once("./framework/Global_controller.php"); ?>
+<?php include_once( __DIR__ . "/../../framework/Global_controller.php"); ?>
 <?php include_once("./_header.php"); ?>
 
+<?php 
+  if(!$user["admin"]) {
+    header("Location: /first-crud");
+  }
+?>
     <a href="./index.php"><button class="btn btn-primary mt-4 ml-4"><- Volver atras</button></a>
     <div class="container mt-4">
         
